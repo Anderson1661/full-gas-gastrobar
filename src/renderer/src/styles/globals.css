@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Dark theme (default) ── */
+  :root {
+    --background: 222 47% 8%;
+    --foreground: 213 31% 91%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 24 100% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 47% 16%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 222 47% 16%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 24 100% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 47% 20%;
+    --input: 222 47% 20%;
+    --ring: 24 100% 53%;
+
+    --radius: 0.625rem;
+  }
+
+  /* ── Light theme ── */
+  .light {
+    --background: 210 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 93%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 93%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 87%;
+    --input: 214 32% 87%;
+  }
+
+  /* ── Midnight theme ── */
+  .midnight {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 222 60% 6%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 222 60% 6%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 9%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 217 33% 9%;
+    --muted-foreground: 215 20% 48%;
+
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 33% 13%;
+    --input: 217 33% 13%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Scrollbar custom */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+}
+
+@layer utilities {
+  .no-drag { -webkit-app-region: no-drag; }
+  .drag { -webkit-app-region: drag; }
+  .table-available   { @apply border-green-500/60 bg-green-500/10; }
+  .table-occupied    { @apply border-red-500/60 bg-red-500/10; }
+  .table-pending     { @apply border-amber-500/60 bg-amber-500/10; }
+  .table-reserved    { @apply border-violet-500/60 bg-violet-500/10; }
+  .table-inactive    { @apply border-gray-500/30 bg-gray-500/5; }
+}
+
+/* ── Animation control ── */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.05s !important;
+  transition-duration: 0.05s !important;
+}
+
+.no-motion *,
+.no-motion *::before,
+.no-motion *::after {
+  animation: none !important;
+  transition: none !important;
+}

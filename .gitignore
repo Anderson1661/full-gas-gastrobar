@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+out/
+dist/
+build/
+release/
+releases/
+*.exe
+*.msi
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+*.zip
+*.rar
+*.7z
+
+# Electron builder
+*.blockmap
+latest.yml
+builder-debug.yml
+builder-effective-config.yaml
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Database local files / dumps
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Coverage / cache
+coverage/
+.cache/
+.vite/
+.eslintcache
+
+# TypeScript
+*.tsbuildinfo
+
+# Temporary
+tmp/
+temp/
+
+.agents/
+.claude/
+plugins/
+promp.txt
