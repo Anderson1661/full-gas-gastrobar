@@ -43,15 +43,22 @@ export default function UpdaterPanel(): JSX.Element {
     updaterApi.getVersion().then(setAppVersion).catch(() => {})
   }, [])
 
+  // Visual ON when saved-enabled OR when form is open (pending confirmation)
+  const isToggledOn = (config?.enabled ?? false) || showForm
+
   function handleToggle(): void {
     if (!config) return
-    if (!config.enabled) {
-      // Show form so user can fill in credentials before enabling
+    if (!isToggledOn) {
+      // User wants to enable → show form first
       setShowForm(true)
       setDraft({ ...draft, enabled: true })
-    } else {
-      // Disable immediately
+    } else if (config.enabled) {
+      // Saved as enabled → disable immediately
       void saveConfig({ ...config, enabled: false })
+    } else {
+      // Form open but not yet saved → cancel
+      setShowForm(false)
+      setDraft({ ...config })
     }
   }
 
@@ -116,23 +123,23 @@ export default function UpdaterPanel(): JSX.Element {
           <p className="text-xs text-muted-foreground">{appVersion || '—'}</p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-muted-foreground">{config.enabled ? 'Activado' : 'Desactivado'}</span>
+          <span className="text-xs text-muted-foreground">{isToggledOn ? 'Activado' : 'Desactivado'}</span>
           <button
             onClick={handleToggle}
             disabled={saving}
             className={`w-12 h-6 rounded-full transition-colors relative shrink-0 ${
-              config.enabled ? 'bg-primary' : 'bg-secondary border border-border'
+              isToggledOn ? 'bg-primary' : 'bg-secondary border border-border'
             }`}
           >
             <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${
-              config.enabled ? 'translate-x-6' : 'translate-x-0.5'
+              isToggledOn ? 'translate-x-6' : 'translate-x-0.5'
             }`} />
           </button>
         </div>
       </div>
 
       {/* Disabled state description */}
-      {!config.enabled && !showForm && (
+      {!isToggledOn && (
         <div className="flex items-start gap-3 rounded-lg bg-secondary border border-border p-4">
           <AlertCircle size={16} className="text-muted-foreground shrink-0 mt-0.5" />
           <div className="space-y-1">
